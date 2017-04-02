@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+ "-//Hibernate/Hibernate Mapping DTD//EN"
+ "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+ <hibernate-mapping>
+   <class name="com.raj.hibernate.OneToManyEmployee" table="EMPLOYEE9">
+     <id name="id" type="int" column = "id">
+       <generator class="increment"></generator>
+     </id>
+     <property name="firstName" type="string" column="first_name"></property>
+     <property name="lastName" type="string" column="last_name"></property>
+     <property name="salary" type="int" column="salary"></property>
+     <set name="certificates" cascade = "all">
+       <key column="employee_id"></key>
+       <one-to-many class="com.raj.hibernate.OneToManyCertificate"/>
+     </set>
+   </class>
+   <class name="com.raj.hibernate.OneToManyCertificate" table = "CERTIFICATE5">
+      <id name="id" type="int" column="id">
+        <generator class="increment"></generator>
+      </id>
+      <property name="name" column="certificate_name" type="string"></property>
+   </class>
+ </hibernate-mapping>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+ 
+<struts-config>
+ 
+	<form-beans>
+		<form-bean name="customerForm"   
+		      type="com.raj.struts.customer.form.CustomerForm" />
+		
+		<form-bean name="dynaCustomerListForm"   
+		      type="org.apache.struts.action.DynaActionForm">
+		      <form-property name="customerList" type="java.util.List"/>
+		</form-bean>
+		
+	</form-beans>
+	
+	<action-mappings>
+
+	 	<action
+			path="/AddCustomerPage"
+			type="org.apache.struts.actions.ForwardAction"
+			parameter="/addCustomer.jsp"/>
+
+
+		<action
+			path="/AddCustomer"
+			type="com.raj.struts.customer.action.AddCustomerAction"
+			name="customerForm"
+			validate="true"
+			input="/addCustomer.jsp"
+			>	
+ 
+			<forward name="success" redirect="true" path="/ListCustomer.do"/>
+		</action>
+		
+		<action
+			path="/ListCustomer"
+			type="com.raj.struts.customer.action.ListCustomerAction"
+			name="dynaCustomerListForm"
+			>	
+ 
+			<forward name="success" path="/listCustomer.jsp"/>
+		</action>
+		
+		
+	</action-mappings>
+ 
+	<message-resources parameter="/Customer" />
+ 
+    <plug-in className="com.raj.hibernate.common.plugin.HibernatePlugin">
+      	<set-property property="path" value="/hibernate.cfg.xml"/>
+    </plug-in>
+ 
+ 
+</struts-config>
